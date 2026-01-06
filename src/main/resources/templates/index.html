@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User Profile</title>
+</head>
+<body>
+
+<h2>User Information Form</h2>
+
+<form th:action="@{/submit}" th:object="${userProfile}" method="post">
+
+    Name: <input type="text" th:field="*{name}" /><br><br>
+
+    Favourite Movie: <input type="text" th:field="*{favouriteMovie}" /><br><br>
+
+    Favourite Genre: <input type="text" th:field="*{favouriteGenre}" /><br><br>
+
+    Favourite Food: <input type="text" th:field="*{favouriteFood}" /><br><br>
+
+    Hobby: <input type="text" th:field="*{hobby}" /><br><br>
+
+    Dream Travel Place: <input type="text" th:field="*{dreamPlace}" /><br><br>
+
+    <button type="submit">Submit (Save)</button>
+</form>
+
+<br>
+
+<form th:action="@{/show-favourites}" method="post">
+    <button type="submit">Show Favourites</button>
+</form>
+
+
+<hr>
+
+<!-- After Save -->
+<h3 th:if="${name != null}">
+    Saved Successfully! Welcome <span th:text="${name}"></span>
+</h3>
+
+<!-- Display Favourites -->
+<div th:if="${favourites != null}">
+    <h3>Favourite Items </h3>
+    <p>Movie: <span th:text="${favourites.favouriteMovie}"></span></p>
+    <p>Genre: <span th:text="${favourites.favouriteGenre}"></span></p>
+    <p>Food: <span th:text="${favourites.favouriteFood}"></span></p>
+    <p>Hobby: <span th:text="${favourites.hobby}"></span></p>
+    <p>Dream Place: <span th:text="${favourites.dreamPlace}"></span></p>
+</div>
+
+</body>
+</html>

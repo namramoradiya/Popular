@@ -1,0 +1,41 @@
+version: '3.8'
+
+networks:
+  personality-network:
+    driver: bridge
+
+services:
+
+  db_personality:
+    image: mysql:8.0
+    container_name: db_container
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: userdb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: userdb
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - personality-network
+
+  springboot-app:
+    build: .
+    container_name: springboot_personality_container
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db_personality
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db_personality:3306/userdb
+      SPRING_DATASOURCE_USERNAME: user
+      SPRING_DATASOURCE_PASSWORD: userdb
+    networks:
+      - personality-network
+
+volumes:
+  mysql_data:

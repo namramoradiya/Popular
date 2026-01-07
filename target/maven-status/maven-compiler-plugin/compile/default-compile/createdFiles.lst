@@ -1,0 +1,6 @@
+com\personality\individual\PersonalityInvolvementApplication.class
+com\personality\individual\service\UserProfileServiceImpl.class
+com\personality\individual\Controller\UserController.class
+com\personality\individual\repository\UserProfileRepository.class
+com\personality\individual\service\UserProfileService.class
+com\personality\individual\Entity\UserProfile.class
